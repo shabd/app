@@ -1,0 +1,13 @@
+<h1>Welcome historical weather page</h1>
+<br />
+{% csrf_token %}
+
+    <ul>
+        <li>Tempreture:{{ data.temperature }}k</li>
+        <li>Time:{{ data.time }}</li>
+        <li>Max Tempreture:{{ data.temp_day }}</li>
+        <li>Min Tempreture:{{ data.temp_night }}</li>
+        </a>
+    </ul>
+
+    {% csrf_token %}
