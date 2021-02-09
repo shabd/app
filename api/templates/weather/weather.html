@@ -19,6 +19,7 @@
         integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+        
 
 </head>
 
@@ -27,34 +28,36 @@
         <h5 class="my-0 mr-md-auto font-weight-normal"><a href="{% url 'weather' %}" class="text-dark">Weather App</a>
         </h5>
         <nav class="my-2 my-md-0 mr-md-3">
-
     </div>
     <br />
-    <form  id="form">{% csrf_token %}
+    <div class=flex>
+    <form  id="form" class=>{% csrf_token %}
         <input type= "text" id="name"/>
         <label for="name">Enter a Adress</label>
-        <input type="submit" value="SUBMIT" />
+        <input type="submit"  value="SUBMIT" />
     </form>
-    <div class="col-md-7 shadow-lg p-3 mb-5 bg-white rounded">
-        <h2>{{ queryset.name }}</h2>
-        <!-- <h1 class="my-3">Description</h1>
-          <p id="weather_data">{{ weather.description }}</p> -->
-        <h1 class="my-3">Details</h1>
-        <ul>
-            <li>Tempreture:{{ queryset.temperature }}k</li>
-            <li>Description:{{ queryset.description }}</li>
-            <li>Max Tempreture:{{ queryset.max_temp }}</li>
-            <li>Min Tempreture:{{ queryset.min_temp }}</li>
-        </h5>
-        </h5>
-           
-            <a onclick="historical_weather();" href="{% url 'historical_weather'   %}">Historical Data</a>
-            See Historical Data for {{weather.name}}
-           
-            </a>
-        
-        </ul>
     </div>
+    <div class="col-md-7 shadow-lg p-3 mb-5 bg-white rounded">
+    
+        <ul>
+            
+            <li> Name:{{ data.name }}</li>
+            <li>Tempreture:{{ data.temperature }}k</li>
+            <li>Description:{{ data.weather_descrption}}</li>
+            <li>Max Tempreture:{{ data.max_temp }}</li>
+            <li>Min Tempreture:{{ data.min_temp }}</li>
+           
+        </h5>
+        </h5>
+
+       
+           <div id="hide">
+            <a onclick="historical_weather();" href="{% url 'historical_weather'  %}">Historical Data</a>
+            </div>
+        </ul>
+        {%block content %}{%endblock%}
+    </div>
+    
 <script type ="text/javascript">
 
     $(document).on('submit', '#form', function(e){
@@ -64,7 +67,7 @@
 
         $.ajax({
             type: 'POST',
-            url: '/api/weather',
+            url: '',
             data: {
                 name: $('#name').val(),
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
@@ -81,13 +84,15 @@
     function historical_weather(){
         $.ajax({
             type:"POST",
-            url:'/api/historical_weather',
+            url:'/historical_weather',
             data:{
                 name: $('#name').val(),
                 csrfmiddlewaretoken: $('input[name=csrfmiddlewaretoken]').val()
             }
         })
     }
+
+   
 
     
 

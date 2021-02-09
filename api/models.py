@@ -31,4 +31,4 @@ class HistoricalWeather(models.Model):
     weather = models.ForeignKey(Weather, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.time
+        return self.name
